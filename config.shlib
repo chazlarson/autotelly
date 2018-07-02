@@ -1,0 +1,66 @@
+config_read_file() {
+    (grep -E "^${2}=" -m 1 "${1}" 2>/dev/null || echo "VAR=__UNDEFINED__") | head -n 1 | cut -d '=' -f 2-;
+}
+
+config_get() {
+    val="$(config_read_file config.cfg "${1}")";
+    if [ "${val}" = "__UNDEFINED__" ]; then
+        val="$(config_read_file config.cfg.defaults "${1}")";
+    fi
+    printf -- "%s" "${val}";
+}
+
+
+echo_config_details () {
+    if [[ $echo_config == 1 ]]; then
+
+        echo "=========================================="
+        echo "=    read from config files[s]    ========"
+        echo ''
+        echo create_sd_script=$create_sd_script
+        echo create_hd_script=$create_hd_script
+        echo create_shell_scripts=$create_shell_scripts
+        echo add_channels=$add_channels
+
+        echo iptv_m3u_url=$iptv_m3u_url
+        echo iptv_epg_url=$iptv_epg_url
+
+        echo CG=$CG
+        echo m3u_editor_repo=$m3u_editor_repo
+
+        echo build_telly=$build_telly
+        echo telly_repo=$telly_repo
+        echo built_telly_exe=$built_telly_exe
+
+        echo telly_link=$telly_link
+        echo latest_telly_exe=$latest_telly_exe
+        echo "=========================================="
+        echo ''
+        echo ''
+        echo "=========================================="
+        echo "=    directories    ======================"
+        echo ''
+        echo base_loc=$base_loc
+        echo original_loc=$original_loc
+        echo sorted_loc=$sorted_loc
+        echo hd_loc=$hd_loc
+        echo sd_loc=$sd_loc
+        echo m3u_editor_loc=$m3u_editor_loc
+        echo m3u_editor_repo=$m3u_editor_repo
+        echo telly_repo=$telly_repo
+        echo ''
+        echo "=========================================="
+        echo ''
+        echo "=========================================="
+        echo "=    config         ======================"
+        echo ''
+        echo is_vaders=$is_vaders
+        echo ''
+        echo sed_exe=$sed_exe
+        echo awk_exe=$awk_exe
+        echo ''
+        echo "=========================================="
+        read -p "Press [Enter] key to continue..."
+
+    fi
+}

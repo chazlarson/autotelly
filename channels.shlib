@@ -1,0 +1,58 @@
+channel_processing () {
+    echo ''
+    echo "Processing $1"
+   if [ $add_channels == 1 ]; then
+        cp "$1" "$1".original
+        if [ $is_vaders == 1 ]; then
+            echo ''
+            echo "Performing VADER_SPECIFIC channel-number processing"
+
+            # use SED & AWK to add <lcn lang=\"en\">#<\/lcn> to epg
+            # Vaders stock EPG contains this:
+            #     <channel id="I202.58646.schedulesdirect.org">
+            #         <display-name>CNN News HD</display-name><display-name>CNNHD</display-name>
+            #         <display-name>202 CNNHD</display-name>
+            #         <display-name>202</display-name>
+            #         <display-name>CNN HD</display-name>
+            #         <icon src="https://s3.amazonaws.com/schedulesdirect/assets/stationLogos/s58646_h3_aa.png" />
+            #     </channel>
+            # Which becomes, in the sorted EPG:
+            #   <channel id="I202.58646.schedulesdirect.org">
+            #     <display-name>CNN News HD</display-name>
+            #     <display-name>CNNHD</display-name>
+            #     <display-name>202 CNNHD</display-name>
+            #     <display-name>202</display-name>
+            #     <display-name>CNN HD</display-name>
+            #     <icon src="https://s3.amazonaws.com/schedulesdirect/assets/stationLogos/s58646_h3_aa.png" />
+            #   </channel>
+            # It appears all the ones I'm interested in contain:
+            #         <display-name>202</display-name>
+            # So I think I can convert that to:
+            #         <lcn lang=\"en\">202</lcn>
+            # and get what plex wants.
+
+            $sed_exe -i -r 's/<display-name>([0-9]+)<\/display-name>/<lcn lang="en">\1<\/lcn>/g' "$1"
+        else
+            echo ''
+            echo "Performing IPTV-EPG channel-number processing"
+
+            # use SED & AWK to add <lcn lang=\"en\">#<\/lcn> to epg
+            # this will work with iptv-epg.com's EPG, which starts like this:
+            #
+            # <channel id="AandE.us">
+            #  <display-name lang="en">A&amp;E US</display-name>
+            #  <url>http://www.yo.tv</url>
+            #  <icon src="http://static.iptv-epg.com/us/AandE.us.png"/></channel>
+            #
+            # and gets converted to this:
+            #
+            # <channel id="AandE.us">
+            #  <display-name lang="en">A&amp;E US</display-name><lcn lang="en">2</lcn>
+            #  <url>http://www.yo.tv</url>
+            #  <icon src="http://static.iptv-epg.com/us/AandE.us.png"/></channel>
+
+            $sed_exe -i 's/<\/display-name>/<\/display-name><lcn lang=\"en\">zzzzz<\/lcn>/g' "$1"
+            $awk_exe -vRS='^$' -i inplace '{while(sub(/zzzzz/,++z));}1' "$1"
+        fi
+    fi
+}
