@@ -1,0 +1,26 @@
+script_processing () {
+    if [ $create_shell_scripts == 1 ]; then
+		echo ''
+		echo "Creating shell script file for $1"
+
+		echo "#!/bin/bash" > "$2"
+		echo "$base_loc/$telly_exe" -listen 127.0.0.1:8077 -playlist="$3" -temp "$4" -streams 5 -friendlyname "$5" -deviceid "10000009" -logrequests >> "$2"
+		chmod a+x "$2"
+	else
+		echo ''
+		echo "Sorted and filtered M3U available here: $3"
+		echo "Sorted and filtered EPG available here: $6"
+		echo ''
+		echo "Use the former when you start telly:"
+		echo telly -listen 127.0.0.1:8077 \\
+		echo    -playlist="$3" \\
+		echo    -temp "$4" \\
+		echo    -streams 5 \\
+		echo    -friendlyname "$5" \\
+		echo    -deviceid "10000009" \\
+		echo    -logrequests
+		echo ''
+		echo "Copy the latter somewhere that Plex can see it and"
+		echo "enter the URL/path when asked during DVR setup"
+	fi
+}
