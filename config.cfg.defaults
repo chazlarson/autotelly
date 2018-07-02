@@ -1,4 +1,4 @@
-# You'll probably want to create a config.cfg with your config values
+# You'll want to create a config.cfg with your config values
 # Anything not defined in config.cfg will be read from here
 create_sd=1
 create_hd=1
@@ -26,4 +26,3 @@ sorted=sorted
 HD=hd
 SD=sd
 m3u=m3u-epg-editor
-
