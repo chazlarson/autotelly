@@ -20,7 +20,7 @@ There is some processing using sed and awk that rely on the GNU versions rather 
 3) edit config.cfg as desired
 4) run ./autotelly.sh
 
-```bash
+```
 | => ./autotelly.sh
 updating homebrew...
 Already up to date.
@@ -92,11 +92,11 @@ As a side effect of this being set, telly will be built or downloaded as specifi
 If set to 0, telly will not be built or downloaded.  Presumably you're generating files to use elsewhere, perhaps in a docker context, so there's no reason to build or retrieve telly.
 
 ```
-add_channel_numbers=1   # if set, add
+add_channel_numbers=1
 ```
-Plex' Live TV Guide is designed expecting channel numbers; if there are no channel numbers the guide appearance in suboptimal.
+Plex' Live TV Guide is designed expecting channel numbers; if there are no channel numbers the guide appearance in suboptimal. Those channel numbers are specified using an "lcn" tag that most EPG providers don't use.
 
-This will add channel numbers to the EPG XML file.  It's based on a post by hthighway to the telly Discord.
+This will add those tags to the EPG XML file.  It's based on a post by hthighway to the telly Discord.
 
 There are presently two flavors of channel number processing: Vaders.tv and iptv-epg.com.
 
@@ -189,4 +189,4 @@ Thanks to [haxcop](https://github.com/haxcop/AutomatedHMS) for the initial idea.
 
 ### Issues
 
-If you have any problems with or questions about this image, please open a [GitHub issue](/issues).
+If you have any problems with or questions about this thing, please open a [GitHub issue](/issues).
