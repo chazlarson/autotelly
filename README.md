@@ -35,7 +35,7 @@ Already up to date.
 
 clearing directories
 /Users/cl186073/dev/autotelly/m3u-epg-editor
-2018-07-02T09:31:34.545943 performing HTTP GET request to http://api.vaders.tv/vget?username=chazlarson&password=HywadtDMM&format=ts
+2018-07-02T09:31:34.545943 performing HTTP GET request to http://api.vaders.tv/vget?username=REDACTED&password=REDACTED&format=ts
 2018-07-02T09:31:39.025371 saving retrieved m3u file: /Users/cl186073/dev/autotelly/sorted/original.m3u8
 2018-07-02T09:31:39.026915 parsing m3u into a list of objects
 2018-07-02T09:31:39.106425 m3u contains 1287 items
