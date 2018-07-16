@@ -118,7 +118,7 @@ It appears that all the channels that I am interested in contain that "number-on
 to this:
 ```        <lcn lang="en">202</lcn>```
 
-iptv-epg.com stock EPG contains on ly a single display-name field:
+iptv-epg.com stock EPG contains only a single display-name field:
 ```
     <channel id="AandE.us">
         <display-name lang="en">A&amp;E US</display-name>
@@ -151,7 +151,7 @@ The rest of the configuration options probably won't change often.
 ```
 m3u_editor_repo=https://github.com/jjssoftware/m3u-epg-editor.git
 ```
-Perhaps you have your own fork that does something differently?  For example, I use my own fork that eliminates the 90-odd lines of channel and programme logging that a redacted above.
+Perhaps you have your own fork that does something differently?  For example, I use my own fork that eliminates the 90-odd lines of channel and programme logging that are redacted above.
 
 ```
 build_telly=1
